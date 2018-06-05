@@ -1,0 +1,112 @@
+<html>
+
+<head>
+  <title>Test Chart Js</title>
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/Chart.js"></script>
+  <script src="js/chartjs-plugin-datalabels.js"></script>
+  <script src="js/utils.js"></script>
+</head>
+
+<body>
+  <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+    <canvas id="myChart"></canvas>
+  </div>
+  <script>
+
+    var chartData = {
+      datasets: [{
+        label: 'Bar Dataset',
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor()],
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        datalabels: {
+          display: false
+        }
+      },
+      {
+        label: 'Bar Dataset 2',
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 40, 20, 0.2)',
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor()
+        ],
+        datalabels: {
+          display: false
+        }
+      },
+      {
+        label: 'Bar Dataset 3',
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 158, 240, 0.2)',
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor()
+        ],     datalabels: {
+          display: false
+        }
+      }, {
+        label: 'Line Dataset',
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor()
+        ],
+        // Changes this dataset to become a line
+        type: 'line',
+        fill: false,
+        borderColor: ' rgb(54, 162, 235)',
+        pointBorderWidth: 5,
+        spanGaps: true,
+        datalabels: {
+          align: 'top',
+          anchor: 'end',
+          backgroundColor: 'rgba(255, 255, 255,0.5)',
+          borderColor: function (context) {
+            return context.dataset.borderColor
+          },
+          borderWidth: 2,
+          borderRadius: 1,
+          offset: '12',
+          color: 'black',
+          formatter: function (value, context) {
+            return 'abc' + ' : ' + Math.round(value);
+          }
+        }
+      }],
+      labels: ['January', 'February', 'March', 'April']
+    }
+
+    window.onload = () => {
+      var ctx = $("#myChart");
+      var mixedChart = new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: {
+          scales: {
+            xAxes: [{
+              stacked: true,
+            }],
+            yAxes: [{
+              stacked: true
+            }]
+          }
+        }
+      })
+    }
+
+
+  </script>
+</body>
+
+</html>
